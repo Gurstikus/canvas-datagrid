@@ -1,0 +1,32 @@
+name: Build Canvas Datagrid
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Aktualisiert auf Version 3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3  # Aktualisiert auf Version 3
+        with:
+          node-version: '16'  # Oder du kannst '20' angeben, wenn es bereit ist
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3  # Aktualisiert auf Version 3
+        with:
+          name: canvas-datagrid
+          path: dist/canvas-datagrid.js
